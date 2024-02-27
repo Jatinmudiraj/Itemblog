@@ -74,11 +74,11 @@ export default function ProductPage({ product }) {
                   Buy From Amazon
                 </Button>
               </div>
-              {/* <div>
+              <div>
                 <Button primary onClick={() => addProduct(product._id)}>
                   <CartIcon /> Add to cart
                 </Button>
-              // </div> */}
+              </div>
             </PriceRow>
           </div>
         </ColWrapper>
