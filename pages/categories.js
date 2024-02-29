@@ -1,58 +1,120 @@
-import React, { useState } from 'react';
-import Header from "@/components/Header";
-import Center from "@/components/Center";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { mongooseConnect } from "@/lib/mongoose";
 import { Category } from "@/models/category";
+import Header from "@/components/Header";
 import ProductsGrid from "@/components/ProductsGrid";
 import Title from "@/components/Title";
+import styled from 'styled-components';
 
-export default function CategoryPage({ categories }) {
+// Styled components for styling
+const CategoryContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const CategoryList = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+const CategoryItem = styled.li`
+  margin-bottom: 10px;
+`;
+
+const CategoryButton = styled.button`
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+`;
+
+const SelectedCategoryContainer = styled.div`
+  margin-top: 20px;
+`;
+
+const CategoryPage = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [products, setProducts] = useState([]);
+  const router = useRouter();
 
-  const handleCategoryClick = async (categoryId) => {
+  useEffect(() => {
+    if (selectedCategory) {
+      fetchCategoryProducts(selectedCategory);
+    }
+  }, [selectedCategory]);
+
+  const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId);
-    const categoryProducts = await fetchCategoryProducts(categoryId);
-    setProducts(categoryProducts);
+    router.push(`/products?category=${categoryId}`);
   };
 
   const fetchCategoryProducts = async (categoryId) => {
-    await mongooseConnect();
-    const category = await Category.findById(categoryId).populate('products');
-    return category.products;
+    try {
+      await mongooseConnect();
+      const categoryProducts = await Category.findById(categoryId).populate('products');
+      setProducts(categoryProducts.products);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setProducts([]);
+    }
   };
 
   return (
     <>
       <Header />
-      <Center>
+      <CategoryContainer>
         <Title>Categories</Title>
-        <ul>
+        <CategoryList>
           {categories.map(category => (
-            <li key={category._id}>
-              <button onClick={() => handleCategoryClick(category._id)}>
+            <CategoryItem key={category._id}>
+              <CategoryButton onClick={() => handleCategoryClick(category._id)}>
                 {category.name}
-              </button>
-            </li>
+              </CategoryButton>
+            </CategoryItem>
           ))}
-        </ul>
+        </CategoryList>
+        
+        {/* Render selected category name */}
         {selectedCategory && (
-          <>
-            <Title>Products in {categories.find(cat => cat._id === selectedCategory)?.name}</Title>
-            <ProductsGrid products={products} />
-          </>
+          <SelectedCategoryContainer>
+            <h3>Selected Category</h3>
+            <p>{categories.find(cat => cat._id === selectedCategory)?.name}</p>
+            <p>{categories.find(cat => cat._id === selectedCategory)?._id}</p>
+          </SelectedCategoryContainer>
         )}
-      </Center>
+      </CategoryContainer>
+      {/* Render products grid */}
+      {/* <ProductsGrid products={products.category._id} /> */}
     </>
   );
-}
+};
 
 export async function getServerSideProps() {
-  await mongooseConnect();
-  const categories = await Category.find({}, null, { sort: { '_id': -1 } });
-  return {
-    props: {
-      categories: JSON.parse(JSON.stringify(categories)),
-    }
-  };
+  try {
+    await mongooseConnect();
+    const categories = await Category.find({}, null, { sort: { '_id': -1 } });
+    const parsedCategories = JSON.parse(JSON.stringify(categories));
+    
+    return {
+      props: {
+        categories: parsedCategories,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return {
+      props: {
+        categories: [],
+      },
+    };
+  }
 }
+
+export default CategoryPage;
