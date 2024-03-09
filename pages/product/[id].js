@@ -128,7 +128,7 @@ export default function ProductPage({ product }) {
             <p>{product.description}</p>
             <PriceRow>
               <div>
-                <Price>${product.price}</Price>
+                <Price>Rs {product.price}</Price>
               </div>
               {product.fliplink && (
                 <div>
