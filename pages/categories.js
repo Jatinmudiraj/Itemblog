@@ -84,9 +84,7 @@ const CategoryPage = ({ categories }) => {
         {/* Render selected category name */}
         {selectedCategory && (
           <SelectedCategoryContainer>
-            <h3>Selected Category</h3>
-            <p>{categories.find(cat => cat._id === selectedCategory)?.name}</p>
-            <p>{categories.find(cat => cat._id === selectedCategory)?._id}</p>
+            <h3>Selected Category : {categories.find(cat => cat._id === selectedCategory)?.name}</h3>
           </SelectedCategoryContainer>
         )}
       </CategoryContainer>
