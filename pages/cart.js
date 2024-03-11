@@ -670,7 +670,12 @@ export default function CartPage() {
                       onClick={goToPayment}>
                 Continue to payment
               </Button>
-              <img src="/youtube.png" alt="Scan and pay" width={138} height={138}/>
+              
+              <center>
+                <b>
+              <div>Pay Here</div></b>
+              <img src="/payment.png" alt="Scan and pay" width={138} height={138} />
+              </center>
             </Box>
           )}
         </ColumnsWrapper>

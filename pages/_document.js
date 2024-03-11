@@ -6,7 +6,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* Other head elements */}
-          <script src="https://checkout.razorpay.com/v1/checkout.js" />
+          <link rel="shortcut icon" href="/favicon_io/favicon.ico" />
+          <title>Navab Store</title>
+
+          {/* <script src="https://checkout.razorpay.com/v1/checkout.js" /> */}
         </Head>
         <body>
           <Main />

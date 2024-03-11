@@ -118,7 +118,7 @@ export default function Header() {
     <StyledHeader>
       <Center>
         <Wrapper>
-          <Logo href={"/"}>Item Blog</Logo>
+          <Logo href={"/"}>Navab Store</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/product"}>All products</NavLink>

@@ -8,16 +8,24 @@ const Footer = () => {
       <div className="leftSection">
         <div className="info">
           <div className="logo">
-            <h1 className="logoText">Item Blog</h1>
+            <h1 className="logoText">Navab Store</h1>
           </div>
           <p className="desc">
-            This blog is not just a product blog; it's a game-changer blog for life. It brings a fresh perspective to life.
+          This shop isn't just about products; it's a transformative hub for lifestyle enthusiasts. It offers a unique outlook on living.
           </p>
           <div className="icons">
-            <Image src="/facebook.png" alt="Facebook" width={18} height={18} />
-            <Image src="/instagram.png" alt="Instagram" width={18} height={18} />
-            <Image src="/tiktok.png" alt="TikTok" width={18} height={18} />
-            <Image src="/youtube.png" alt="YouTube" width={18} height={18} />
+            <div className="icon">
+              <Image src="/facebook.png" alt="Facebook" width={35} height={35} />
+            </div>
+            <div className="icon">
+              <Image src="/instagram.png" alt="Instagram" width={35} height={35} />
+            </div>
+            <div className="icon">
+              <Image src="/twitter.png" alt="Twitter" width={35} height={35} />
+            </div>
+            <div className="icon">
+              <Image src="/youtube.png" alt="YouTube" width={38} height={38} />
+            </div>
           </div>
         </div>
       </div>
@@ -28,8 +36,8 @@ const Footer = () => {
             <ul>
               <li><Link href="/" style={{ color: 'white' }}>Homepage</Link></li>
               <li><Link href="/products" style={{ color: 'white' }}>All Products</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>About</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>Contact</Link></li>
+              <li><Link href="/categories" style={{ color: 'white' }}>Categories</Link></li>
+              <li><Link href="/cart" style={{ color: 'white' }}>Cart</Link></li>
             </ul>
           </div>
           <div className="list">
@@ -44,11 +52,12 @@ const Footer = () => {
           <div className="list">
             <h2 className="listTitle">Social Media</h2>
             <ul>
-              <li><Link href="/" style={{ color: 'white' }}>Instagram</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>YouTube</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>Facebook</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>Twitter</Link></li>
+              <li><Link href="http://www.instagram.com" target="_blank" style={{ color: 'white' }}>Instagram</Link></li>
+              <li><Link href="http://www.youtube.com" target="_blank" style={{ color: 'white' }}>YouTube</Link></li>
+              <li><Link href="http://www.facebook.com" target="_blank" style={{ color: 'white' }}>Facebook</Link></li>
+              <li><Link href="http://www.twitter.com" target="_blank" style={{ color: 'white' }}>Twitter</Link></li>
             </ul>
+
           </div>
           <div className="list">
             <h2 className="listTitle">Blog</h2>
@@ -104,11 +113,13 @@ const Footer = () => {
           justify-content: center;
         }
 
-        .icons img {
+        .icon {
+          width: 46px; /* Set fixed width */
+          height: 46px; /* Set fixed height */
           transition: transform 0.3s ease;
         }
 
-        .icons img:hover {
+        .icon:hover {
           transform: scale(1.2);
         }
 
