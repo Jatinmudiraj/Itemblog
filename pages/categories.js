@@ -9,34 +9,42 @@ import styled from 'styled-components';
 
 // Styled components for styling
 const CategoryContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  background-color: #f4f4f4;
 `;
 
 const CategoryList = styled.ul`
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const CategoryItem = styled.li`
+  margin-right: 10px;
   margin-bottom: 10px;
 `;
 
 const CategoryButton = styled.button`
-  background-color: #f0f0f0;
+  background-color: #3498db;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color: #fff;
+  font-size: 16px;
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color: #2980b9;
   }
 `;
 
 const SelectedCategoryContainer = styled.div`
   margin-top: 20px;
+  text-align: center;
 `;
 
 const CategoryPage = ({ categories }) => {
